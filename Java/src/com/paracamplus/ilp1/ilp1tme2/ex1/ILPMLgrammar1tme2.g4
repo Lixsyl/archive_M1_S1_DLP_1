@@ -37,7 +37,7 @@ prog returns [com.paracamplus.ilp1.interfaces.IASTprogram node]
     : (exprs+=expr ';'?) * EOF
     ;
 
-function returns [Void]
+function returns [Void node]
 	: 'function' f=IDENT '(' (var1+=IDENT)? (',' var2+=IDENT)* ')' exprs+=expr
 	;
 	

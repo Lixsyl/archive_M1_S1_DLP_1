@@ -4,7 +4,7 @@
  * See http://mooc.paracamplus.com/ilp9
  * GPL version 3
  ***************************************************************** */
-package com.paracamplus.ilp1.ilp1tme2.ex1;
+package com.paracamplus.ilp1.ilp1tme2.ex2;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class InterpreterTest {
         IXMLParser xmlParser = new XMLParser(factory);
         xmlParser.setGrammar(new File(XMLgrammarFile));
         run.setXMLParser(xmlParser);
-        run.setILPMLParser(new ILPMLParsertme2(factory));
+        run.setILPMLParser(new ILPMLParserEx2(factory));
 
         // configuration de l'interprète
         StringWriter stdout = new StringWriter();
