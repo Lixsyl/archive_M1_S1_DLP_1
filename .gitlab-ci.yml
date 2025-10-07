@@ -31,6 +31,7 @@ TME2:
     /home/dlp/run5.sh -id TME2 -name TME2
     com.paracamplus.ilp1.ilp1tme2.ex1.InterpreterTest
     com.paracamplus.ilp1.ilp1tme2.ex2.InterpreterTest
+    com.paracamplus.ilp1.ilp1tme2.ex2.InterpreterTest2
   artifacts:
     reports:
       junit: report.xml
