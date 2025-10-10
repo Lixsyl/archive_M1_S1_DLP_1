@@ -9,6 +9,7 @@ package com.paracamplus.ilp1.interpreter;
 import java.io.Writer;
 import java.math.BigDecimal;
 
+import com.paracamplus.ilp1.ilp1tme3.Sinus;
 import com.paracamplus.ilp1.interpreter.interfaces.IGlobalVariableEnvironment;
 import com.paracamplus.ilp1.interpreter.primitive.Newline;
 import com.paracamplus.ilp1.interpreter.primitive.Print;
@@ -24,5 +25,6 @@ public class GlobalVariableStuff {
         env.addGlobalVariableValue(new Newline(out));
         env.addGlobalVariableValue(new ToString());
         env.addGlobalVariableValue(new TypeOf());
+        env.addGlobalVariableValue(new Sinus());
   }
 }
