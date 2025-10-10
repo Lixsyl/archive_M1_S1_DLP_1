@@ -1019,6 +1019,61 @@ ILP_sinus (ILP_Object self)
      }
 }
 
+ILP_Object
+ILP_makeVector (ILP_Object taille, ILP_Object valeur)
+{
+	 if (taille->_class != &ILP_object_Integer_class) {
+        return ILP_make_string("<invalid size>");
+     }
+     
+     int size = taille->_content.asInteger;
+     if (size < 0) {
+         return ILP_make_string("<negative size>");
+     }
+     
+     ILP_Object* array = (ILP_Object*)malloc(sizeof(ILP_Object) * size);
+     if (array == NULL) {
+        return ILP_make_string("<memory allocation failed>");
+     }
+     for (int i = 0; i < size; i++) {
+        array[i] = valeur;
+     }
+     
+     
+     return ILP_make_string("<unimplemented>");
+     
+}
+ILP_Object
+ILP_vectorLength (ILP_Object vecteur)
+{
+     if ( self->_class == &ILP_object_Integer_class ) {
+     	  double radians = self->_content.asInteger * ILP_pi()->_content.asFloat / 180.0;
+          double val = sin(radians);
+          return ILP_make_float(val);
+     } else if ( self->_class == &ILP_object_Float_class ) {
+     	  double radians = self->_content.asFloat * ILP_pi()->_content.asFloat / 180.0;
+          double val = sin(radians);
+          return ILP_make_float(val);
+     } else {
+          return ILP_make_string("<unimplemented>");
+     }
+}
+ILP_Object
+ILP_vectorGet (ILP_Object vecteur, ILP_Object index)
+{
+     if ( self->_class == &ILP_object_Integer_class ) {
+     	  double radians = self->_content.asInteger * ILP_pi()->_content.asFloat / 180.0;
+          double val = sin(radians);
+          return ILP_make_float(val);
+     } else if ( self->_class == &ILP_object_Float_class ) {
+     	  double radians = self->_content.asFloat * ILP_pi()->_content.asFloat / 180.0;
+          double val = sin(radians);
+          return ILP_make_float(val);
+     } else {
+          return ILP_make_string("<unimplemented>");
+     }
+}
+
 /** Type name of a value (as a string). */
 ILP_Object
 ILP_type_of (ILP_Object self)

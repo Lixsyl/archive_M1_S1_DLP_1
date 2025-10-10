@@ -25,6 +25,5 @@ public class GlobalVariableStuff {
         env.addGlobalVariableValue(new Newline(out));
         env.addGlobalVariableValue(new ToString());
         env.addGlobalVariableValue(new TypeOf());
-        env.addGlobalVariableValue(new Sinus());
   }
 }

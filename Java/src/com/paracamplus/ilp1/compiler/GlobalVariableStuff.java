@@ -19,7 +19,5 @@ public class GlobalVariableStuff {
                 new Primitive("to_string", "ILP_to_string", 1));
         env.addGlobalFunctionValue(
                 new Primitive("type_of", "ILP_type_of", 1));
-        env.addGlobalFunctionValue(
-        		new Primitive("sinus", "ILP_sinus", 1));
     }
 }

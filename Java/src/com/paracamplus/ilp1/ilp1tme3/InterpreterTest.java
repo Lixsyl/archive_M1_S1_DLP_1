@@ -51,6 +51,10 @@ public class InterpreterTest {
         run.setStdout(stdout);
         IGlobalVariableEnvironment gve = new GlobalVariableEnvironment();
         GlobalVariableStuff.fillGlobalVariables(gve, stdout);
+        gve.addGlobalVariableValue(new Sinus());
+        gve.addGlobalVariableValue(new makeVector());
+        gve.addGlobalVariableValue(new vectorLength());
+        gve.addGlobalVariableValue(new vectorGet());
         IOperatorEnvironment oe = new OperatorEnvironment();
         OperatorStuff.fillUnaryOperators(oe);
         OperatorStuff.fillBinaryOperators(oe);

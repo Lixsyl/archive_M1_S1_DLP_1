@@ -20,6 +20,7 @@ import com.paracamplus.ilp1.compiler.GlobalVariableEnvironment;
 import com.paracamplus.ilp1.compiler.GlobalVariableStuff;
 import com.paracamplus.ilp1.compiler.OperatorEnvironment;
 import com.paracamplus.ilp1.compiler.OperatorStuff;
+import com.paracamplus.ilp1.compiler.Primitive;
 import com.paracamplus.ilp1.compiler.interfaces.IGlobalVariableEnvironment;
 import com.paracamplus.ilp1.compiler.interfaces.IOperatorEnvironment;
 import com.paracamplus.ilp1.compiler.optimizer.IdentityOptimizer;
@@ -53,6 +54,15 @@ public class CompilerTest {
         OperatorStuff.fillBinaryOperators(ioe);
         IGlobalVariableEnvironment gve = new GlobalVariableEnvironment();
         GlobalVariableStuff.fillGlobalVariables(gve);
+        gve.addGlobalFunctionValue(
+        		new Primitive("sinus", "ILP_sinus", 1));
+        gve.addGlobalFunctionValue(
+        		new Primitive("makeVector", "ILP_makeVector", 2));
+        gve.addGlobalFunctionValue(
+        		new Primitive("vectorLength", "ILP_vectorLength", 1));
+        gve.addGlobalFunctionValue(
+        		new Primitive("vectorGet", "ILP_vectorGet", 2));
+        
         Compiler compiler = new Compiler(ioe, gve);
         compiler.setOptimizer(new IdentityOptimizer());
         run.setCompiler(compiler);
