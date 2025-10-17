@@ -43,6 +43,10 @@ typedef struct ILP_Object {
           unsigned char asBoolean;
           int           asInteger;
           double        asFloat;
+          struct asVector {
+               int      _size;
+               struct ILP_Object* vecteur[1];
+          } asVector;
           struct asString {
                int      _size;
                char     asCharacter[1];
@@ -291,6 +295,15 @@ extern ILP_Object ILP_dont_call_super_method(
        ILP_domain_error("Not a string", o); \
   };
 
+
+#define ILP_AllocateVector(length) \
+  ILP_malloc(sizeof(struct ILP_Object) \
+             + (length)+1, &ILP_object_Vector_class)
+
+#define ILP_AllocateVector1(length) \
+  ILP_malloc(sizeof(struct ILP_Object) + sizeof(ILP_Object*) * ((length) - 1), &ILP_object_Vector_class)
+
+
 /** Unary operators */
 
 #define ILP_Opposite(o) \
@@ -354,6 +367,7 @@ extern struct ILP_Class ILP_object_Integer_class;
 extern struct ILP_Class ILP_object_Float_class;
 extern struct ILP_Class ILP_object_Boolean_class;
 extern struct ILP_Class ILP_object_String_class;
+extern struct ILP_Class ILP_object_Vector_class;
 extern struct ILP_Class ILP_object_Exception_class;
 extern struct ILP_Field ILP_object_super_field;
 extern struct ILP_Field ILP_object_defining_class_field;
@@ -392,6 +406,9 @@ extern ILP_Object ILP_print (ILP_Object self);
 extern ILP_Object ILP_to_string (ILP_Object self);
 extern ILP_Object ILP_type_of (ILP_Object self);
 extern ILP_Object ILP_sinus (ILP_Object self);
+extern ILP_Object ILP_makeVector (ILP_Object o1, ILP_Object o2);
+extern ILP_Object ILP_vectorLength (ILP_Object self);
+extern ILP_Object ILP_vectorGet (ILP_Object o1, ILP_Object o2);
 extern ILP_Object ILPm_print (ILP_Closure useless, ILP_Object self);
 extern ILP_Object ILP_classOf (ILP_Object self);
 extern ILP_Object ILPm_classOf (ILP_Closure useless, ILP_Object self);

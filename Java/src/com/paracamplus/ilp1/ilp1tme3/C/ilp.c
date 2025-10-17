@@ -126,6 +126,17 @@ struct ILP_Class ILP_object_String_class = {
            ILP_classOf } } }
 };
 
+struct ILP_Class ILP_object_Vector_class = {
+     &ILP_object_Class_class,
+     { { &ILP_object_Object_class,
+         "Vector",
+         0,
+         NULL,
+         2,
+         { ILP_print,
+           ILP_classOf } } }
+};
+
 struct ILP_Class ILP_object_Exception_class = {
      &ILP_object_Class_class,
      { { &ILP_object_Object_class,
@@ -1022,8 +1033,8 @@ ILP_sinus (ILP_Object self)
 ILP_Object
 ILP_makeVector (ILP_Object taille, ILP_Object valeur)
 {
-	 if (taille->_class != &ILP_object_Integer_class) {
-        return ILP_make_string("<invalid size>");
+     if (taille->_class != &ILP_object_Integer_class) {
+             return ILP_make_string("<invalid size>");
      }
      
      int size = taille->_content.asInteger;
@@ -1031,44 +1042,33 @@ ILP_makeVector (ILP_Object taille, ILP_Object valeur)
          return ILP_make_string("<negative size>");
      }
      
-     ILP_Object* array = (ILP_Object*)malloc(sizeof(ILP_Object) * size);
-     if (array == NULL) {
-        return ILP_make_string("<memory allocation failed>");
-     }
+     ILP_Object array = ILP_AllocateVector(size);
+     array->_content.asVector._size = size;
+     
+     
      for (int i = 0; i < size; i++) {
-        array[i] = valeur;
+         array->_content.asVector.vecteur[i] = valeur;
      }
      
-     
-     return ILP_make_string("<unimplemented>");
-     
+     return array; 
 }
+
+
 ILP_Object
 ILP_vectorLength (ILP_Object vecteur)
 {
-     if ( self->_class == &ILP_object_Integer_class ) {
-     	  double radians = self->_content.asInteger * ILP_pi()->_content.asFloat / 180.0;
-          double val = sin(radians);
-          return ILP_make_float(val);
-     } else if ( self->_class == &ILP_object_Float_class ) {
-     	  double radians = self->_content.asFloat * ILP_pi()->_content.asFloat / 180.0;
-          double val = sin(radians);
-          return ILP_make_float(val);
+     if ( vecteur->_class == &ILP_object_Vector_class ) {
+     	  return ILP_make_integer(vecteur->_content.asVector._size);
      } else {
           return ILP_make_string("<unimplemented>");
      }
 }
+
 ILP_Object
 ILP_vectorGet (ILP_Object vecteur, ILP_Object index)
 {
-     if ( self->_class == &ILP_object_Integer_class ) {
-     	  double radians = self->_content.asInteger * ILP_pi()->_content.asFloat / 180.0;
-          double val = sin(radians);
-          return ILP_make_float(val);
-     } else if ( self->_class == &ILP_object_Float_class ) {
-     	  double radians = self->_content.asFloat * ILP_pi()->_content.asFloat / 180.0;
-          double val = sin(radians);
-          return ILP_make_float(val);
+     if (( vecteur->_class == &ILP_object_Vector_class ) && (index->_class == &ILP_object_Integer_class)){
+     	  return (vecteur->_content.asVector.vecteur)[index->_content.asInteger];
      } else {
           return ILP_make_string("<unimplemented>");
      }
