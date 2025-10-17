@@ -1048,8 +1048,7 @@ ILP_makeVector (ILP_Object taille, ILP_Object valeur)
      
      for (int i = 0; i < size; i++) {
          array->_content.asVector.vecteur[i] = valeur;
-     }
-     
+     } 
      return array; 
 }
 
