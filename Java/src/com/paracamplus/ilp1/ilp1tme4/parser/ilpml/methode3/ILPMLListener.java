@@ -1,4 +1,4 @@
-package com.paracamplus.ilp1.ilp1tme4.parser.ilpml;
+package com.paracamplus.ilp1.ilp1tme4.parser.ilpml.methode3;
 
 import java.util.List;
 
@@ -8,12 +8,15 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import com.paracamplus.ilp1.interfaces.IASTfactory;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.ASTunless;
 import com.paracamplus.ilp1.interfaces.IASTblock;
 import com.paracamplus.ilp1.interfaces.IASTexpression;
 import com.paracamplus.ilp1.interfaces.IASTvariable;
 
-import antlr4.ILPMLgrammar1Listener;
-import static antlr4.ILPMLgrammar1Parser.*;
+import antlr4.ILPMLgrammar1tme4Listener;
+import antlr4.ILPMLgrammar1tme4Parser.UnlessContext;
+
+import static antlr4.ILPMLgrammar1tme4Parser.*;
 
 /**
  * Cette classe décrit à ANTRL comment construire un AST.
@@ -25,7 +28,7 @@ import static antlr4.ILPMLgrammar1Parser.*;
  * de grammaire à l'autre.
  * 
  */
-public class ILPMLListener implements ILPMLgrammar1tme4 {
+public class ILPMLListener implements ILPMLgrammar1tme4Listener {
 	
 	/*
 	 * Le parseur est paramétré par une fabrique qui indique comment
@@ -48,11 +51,6 @@ public class ILPMLListener implements ILPMLgrammar1tme4 {
 	
 	@Override 
 	public void exitVariable(VariableContext ctx) { 
-		ctx.node = factory.newVariable(ctx.getText());
-	}
-	
-	@Override 
-	public void exitUnless(VariableContext ctx) { 
 		ctx.node = factory.newVariable(ctx.getText());
 	}
 
@@ -230,5 +228,12 @@ public class ILPMLListener implements ILPMLgrammar1tme4 {
 	@Override	public void enterConstString(ConstStringContext ctx) {}
 	@Override	public void enterUnary(UnaryContext ctx) {}
 	@Override	public void enterInvocation(InvocationContext ctx) {}
+
+	@Override public void enterUnless(UnlessContext ctx) {}
+
+	@Override
+	public void exitUnless(UnlessContext ctx) {
+		ctx.node = new ASTunless (ctx.body.node, ctx.condition.node);
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.paracamplus.ilp1.ilp1tme4.parser.ilpml;
+package com.paracamplus.ilp1.ilp1tme4.parser.ilpml.methode2;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -6,36 +6,30 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import antlr4.ILPMLgrammar1tme4Lexer;
 import antlr4.ILPMLgrammar1tme4Parser;
+
 import com.paracamplus.ilp1.interfaces.IASTfactory;
 import com.paracamplus.ilp1.interfaces.IASTprogram;
 import com.paracamplus.ilp1.parser.ParseException;
-import com.paracamplus.ilp1.tools.Input;
+import com.paracamplus.ilp1.parser.ilpml.ILPMLParser;
 
-public class ILPMLParsertme4 {
+public class ILPMLParsertme4 extends ILPMLParser{
 	
-	protected IASTfactory factory;
-
 	public ILPMLParsertme4(IASTfactory factory) {
-		this.factory = factory;
+		super(factory);
 	}
-	
-	protected Input input;
-	
-	public void setInput(Input input) {
-		this.input = input;
-	}
-	
-    public IASTprogram getProgram() throws ParseException {
+
+	@Override
+	public IASTprogram getProgram() throws ParseException {
 		try {
 			ANTLRInputStream in = new ANTLRInputStream(input.getText());
 			// flux de caractères -> analyseur lexical
-			ILPMLgrammar1Lexer lexer = new ILPMLgrammar1tme4Lexer(in);
+			ILPMLgrammar1tme4Lexer lexer = new ILPMLgrammar1tme4Lexer(in);
 			// analyseur lexical -> flux de tokens
 			CommonTokenStream tokens =	new CommonTokenStream(lexer);
 			// flux tokens -> analyseur syntaxique
-			ILPMLgrammar1Parser parser =	new ILPMLgrammar1tme4Parser(tokens);
+			ILPMLgrammar1tme4Parser parser =	new ILPMLgrammar1tme4Parser(tokens);
 			// démarage de l'analyse syntaxique
-			ILPMLgrammar1Parser.ProgContext tree = parser.prog();		
+			ILPMLgrammar1tme4Parser.ProgContext tree = parser.prog();		
 			// parcours de l'arbre syntaxique et appels du Listener
 			ParseTreeWalker walker = new ParseTreeWalker();
 			ILPMLListener extractor = new ILPMLListener(factory);
@@ -44,6 +38,7 @@ public class ILPMLParsertme4 {
 		} catch (Exception e) {
 			throw new ParseException(e);
 		}
-    }
+		
+	}
 
 }
