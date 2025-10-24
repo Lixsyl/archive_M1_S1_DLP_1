@@ -7,6 +7,9 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import antlr4.ILPMLgrammar1tme4Lexer;
 import antlr4.ILPMLgrammar1tme4Parser;
 
+import com.paracamplus.ilp1.compiler.normalizer.INormalizationFactory;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.ASTfactorytme4;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.IASTfactorytme4;
 import com.paracamplus.ilp1.interfaces.IASTfactory;
 import com.paracamplus.ilp1.interfaces.IASTprogram;
 import com.paracamplus.ilp1.parser.ParseException;
@@ -33,8 +36,9 @@ public class ILPMLParsertme4 extends ILPMLParser{
 			// parcours de l'arbre syntaxique et appels du Listener
 			ParseTreeWalker walker = new ParseTreeWalker();
 			ILPMLListener extractor = new ILPMLListener(factory);
-			walker.walk(extractor, tree);	
-			return tree.node;
+			walker.walk(extractor, tree);
+			VisitorMethode2 visitmeth = new VisitorMethode2((IASTfactorytme4)factory);
+			return (IASTprogram)visitmeth.visit(tree.node, null);
 		} catch (Exception e) {
 			throw new ParseException(e);
 		}

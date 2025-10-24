@@ -4,17 +4,15 @@
  * See http://mooc.paracamplus.com/ilp9
  * GPL version 3
  ***************************************************************** */
-package com.paracamplus.ilp1.ilp1tme4.parser.ilpml.methode3;
+package com.paracamplus.ilp1.ilp1tme4.parser.ilpml;
 
-import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.IASTunless;
 import com.paracamplus.ilp1.interpreter.Interpreter;
 import com.paracamplus.ilp1.interpreter.interfaces.EvaluationException;
 import com.paracamplus.ilp1.interpreter.interfaces.IGlobalVariableEnvironment;
 import com.paracamplus.ilp1.interpreter.interfaces.ILexicalEnvironment;
 import com.paracamplus.ilp1.interpreter.interfaces.IOperatorEnvironment;
 
-public class Interpretertme4
-extends Interpreter {
+public class Interpretertme4 extends Interpreter implements IASTvisitortme4<Object, ILexicalEnvironment, EvaluationException>{
     
     public Interpretertme4 (IGlobalVariableEnvironment globalVariableEnvironment,
                         IOperatorEnvironment operatorEnvironment ) {
@@ -23,6 +21,7 @@ extends Interpreter {
 
     private static Object whatever = "whatever";
     
+    @Override
     public Object visit(IASTunless iast, ILexicalEnvironment lexenv) throws EvaluationException {
         Object c = iast.getCondition().accept(this, lexenv);
         if ( c != null && c instanceof Boolean ) {

@@ -14,7 +14,8 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import com.paracamplus.ilp1.ast.ASTfactory;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.ASTfactorytme4;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.Interpretertme4;
 import com.paracamplus.ilp1.interfaces.IASTfactory;
 import com.paracamplus.ilp1.interpreter.GlobalVariableEnvironment;
 import com.paracamplus.ilp1.interpreter.GlobalVariableStuff;
@@ -39,7 +40,7 @@ public class InterpreterTest {
     	InterpreterRunner run = new InterpreterRunner();
     	
     	// configuration du parseur
-        IASTfactory factory = new ASTfactory();
+        IASTfactory factory = new ASTfactorytme4();
         IXMLParser xmlParser = new XMLParser(factory);
         xmlParser.setGrammar(new File(XMLgrammarFile));
         run.setXMLParser(xmlParser);

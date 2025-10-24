@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import com.paracamplus.ilp1.interfaces.IASTfactory;
-import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.ASTunless;
+import com.paracamplus.ilp1.ilp1tme4.parser.ilpml.ASTfactorytme4;
 import com.paracamplus.ilp1.interfaces.IASTblock;
 import com.paracamplus.ilp1.interfaces.IASTexpression;
 import com.paracamplus.ilp1.interfaces.IASTvariable;
@@ -233,7 +233,7 @@ public class ILPMLListener implements ILPMLgrammar1tme4Listener {
 
 	@Override
 	public void exitUnless(UnlessContext ctx) {
-		ctx.node = new ASTunless (ctx.body.node, ctx.condition.node);
+		ctx.node = ((ASTfactorytme4)factory).newUnless (ctx.body.node, ctx.condition.node);
 	}
 
 }
